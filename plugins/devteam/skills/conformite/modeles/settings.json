@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "devteam": {
+      "source": {
+        "source": "github",
+        "repo": "tigamadou/devteam"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "devteam@devteam": true
+  }
+}

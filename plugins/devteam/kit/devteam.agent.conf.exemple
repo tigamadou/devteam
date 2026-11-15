@@ -1,0 +1,31 @@
+# Valeurs du projet pour le moteur d'environnement d'agent devteam (scripts/devteam/agent-env/agent-env.sh).
+# Copié une fois à la racine du dépôt sous le nom devteam.agent.conf par la mission de mise en conformité ; ce fichier
+# appartient ensuite au projet. Il est aussi le document des profils et du budget (section « budget » du fichier
+# projet) : les chiffres n'existent qu'ici.
+#
+# Mesurer chaque coût : lancer l'environnement du profil seul, laisser les conteneurs en régime établi, puis relever
+# la mémoire avec « make agent-status » (ou docker stats). Remplacer chaque 0 par la valeur mesurée, en Mo.
+
+DEVTEAM_PROJET=monprojet                 # préfixe des worktrees (../monprojet-wt-<lot>) et projets Compose (monprojet-ag-<lot>)
+DEVTEAM_PROFILS="web api complet"        # profils d'agent
+
+DEVTEAM_COUT_MO_web=0                    # coût mesuré de chaque profil, en Mo
+DEVTEAM_COUT_MO_api=0
+DEVTEAM_COUT_MO_complet=0
+
+DEVTEAM_SERVICES_web="web"               # services Compose lancés pour chaque profil
+DEVTEAM_SERVICES_api="api worker"
+DEVTEAM_SERVICES_complet="api worker web"
+
+DEVTEAM_STACK_MO=0                       # mémoire de la stack principale en régime établi, en Mo
+DEVTEAM_MARGE_MO=1500                    # marge laissée à la machine, en Mo (à choisir selon la machine)
+
+DEVTEAM_COMPOSE_FICHIERS="compose.yml compose.agent.yml"   # fichiers Compose d'un environnement d'agent
+DEVTEAM_PROJET_PRINCIPAL=monprojet       # projet Compose de la stack principale
+DEVTEAM_SERVICES_INFRA="postgres"        # services qui doivent tourner dans la stack principale
+
+# Ressources isolées par lot : <type>:<paramètre>, {lot} remplacé par le lot ; un adaptateur
+# scripts/devteam-adaptateurs/<type>.sh par type (exemples dans le kit : postgres, mysql, redis, s3, port, plafond).
+DEVTEAM_RESSOURCES="postgres:monprojet_{lot} s3:monprojet-{lot}"
+
+DEVTEAM_LOT_MAX=40                       # longueur maximale d'un nom de lot (noms de bases et de buckets ≤ 63 caractères)

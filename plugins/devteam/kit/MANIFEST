@@ -1,0 +1,13 @@
+# Fichiers du kit copiés dans les projets : <ensemble> <chemin>, chemin identique dans kit/ et dans le projet.
+# Ensembles : base (toujours), agent (seulement si le projet a un devteam.agent.conf).
+base make/devteam.mk
+base scripts/devteam/check-perimetre.sh
+base scripts/devteam/labels.sh
+base scripts/devteam/tests/helpers.bash
+base scripts/devteam/tests/check-perimetre.bats
+base scripts/devteam/tests/labels.bats
+agent scripts/devteam/agent-env/agent-env.sh
+agent scripts/devteam/agent-env/tests/helpers.bash
+agent scripts/devteam/agent-env/tests/agent-env.bats
+agent scripts/devteam/agent-env/tests/fakes/docker
+agent make/devteam-agent.mk

@@ -1,0 +1,62 @@
+# Modèle de CI devteam : chaque job appelle une cible make ; ci-ok agrège le résultat et c'est LUI qu'on rend
+# obligatoire dans la protection de branche (check requis unique). Remplacer <integration> par la branche
+# d'intégration, retirer les jobs dont la cible est déclarée « sans objet » (et les retirer de needs).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [<integration>]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test-cible T=.
+
+  check-generated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make check-generated
+
+  migrations-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make migrations-check
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make e2e-fixtures
+      - run: make e2e
+
+  ci-ok:
+    if: always()
+    needs: [lint, typecheck, test, check-generated, migrations-check, e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tous les jobs exécutés ont réussi
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          echo "$NEEDS" | jq -e 'all(.[]; .result == "success" or .result == "skipped")'

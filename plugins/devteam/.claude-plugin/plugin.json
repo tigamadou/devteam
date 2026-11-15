@@ -1,0 +1,10 @@
+{
+  "name": "devteam",
+  "version": "1.0.0",
+  "description": "Missions de développement parallèles par une équipe d'agents : diagnostic et mise en conformité du projet, découpage en lots, supervision jusqu'à la PR finale.",
+  "author": {
+    "name": "tigamadou"
+  },
+  "repository": "https://github.com/tigamadou/devteam",
+  "license": "MIT"
+}
