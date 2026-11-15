@@ -1,0 +1,16 @@
+{
+  "name": "devteam",
+  "owner": {
+    "name": "tigamadou"
+  },
+  "metadata": {
+    "description": "Marketplace du plugin devteam."
+  },
+  "plugins": [
+    {
+      "name": "devteam",
+      "source": "./plugins/devteam",
+      "description": "Missions de développement parallèles par une équipe d'agents : diagnostic et mise en conformité du projet, découpage en lots, supervision jusqu'à la PR finale."
+    }
+  ]
+}
